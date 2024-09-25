@@ -45,20 +45,16 @@ while True :
         outfile.close()
 
     elif command == 'm':
-        txtfile = 'test.txt'
-        infile = open(txtfile, "r")
-        lines = infile.readlines()
-        for line in range(list.size):
+        word_counts = {}
+        len = list.size
+        for line in range(len):
             word_pattern = r'\w+'
-            words = re.findall(word_pattern, list.getEntry(line).lower())
-            word_counts = {}
-            for line in lines:
-                words = re.findall(r'\w+', line.lower())
-                for word in words:
-                    word_counts[word] = word_counts.get(word, 0) + 1
-        dicfile = 'dic.txt'
-        outfile = open(dicfile, "w")
+            words = re.findall(word_pattern, list.getEntry(line))
+            for word in words:
+                word_counts[word] = word_counts.get(word, 0) + 1
+        filename = 'dic.txt'
+        outfile = open(filename, "w")
         for word, count in word_counts.items():
-            print("%s : %d" % (word, count))
+            print(word, ":", count)
             outfile.write("%s : %d\n" % (word, count))
         outfile.close()
